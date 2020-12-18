@@ -1,12 +1,22 @@
 #include <iostream>
 #include <boost/core/lightweight_test.hpp>
-
+#include <boost/smart_ptr.hpp>
 
 int main(int argc, char* argv[])
 {
     {
-        // BOOST_STATIC_ASSERT_MSG(16 == 0x10, "not equal");
-        // std::cout << my_min((short)1, (short)3) << std::endl;
-        // std::cout << my_min((long)1, (long)3) << std::endl;
+        // 一个简单的测试用例
+        boost::shared_ptr<int> p = boost::make_shared<int>(10);
+
+        BOOST_TEST(*p == 10);
+        BOOST_TEST(p.unique());
+        BOOST_TEST_NOT(!p);
+        BOOST_TEST_EQ(p.use_count(), 1);
+        BOOST_TEST_NE(*p, 20);
+
+        p.reset();
+        BOOST_TEST_THROWS(p, std::runtime_error);
+        //BOOST_ERROR("ERROR ACCURED!!!");
     }
+    return boost::report_errors();
 }

@@ -10,10 +10,11 @@
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-std=c++11",
-                "-pthread",
                 "-Wall", // 显示所有警告
                 "-Wextra", // 显示额外警告
-                //"-Wfatal-errors" // 遇到第一个错误就停止，减少查找错误时间
+                "-Wfatal-errors", // 遇到第一个错误就停止，减少查找错误时间
+                "-lboost_unit_test_framework",
+                "-lboost_test_exec_monitor" 
             ],
             "options": {
                 "cwd": "/usr/bin"
