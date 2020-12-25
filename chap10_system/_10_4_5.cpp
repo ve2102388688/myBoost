@@ -56,4 +56,42 @@ int main(int argc, char* argv[])
         std::cout << "available: " << si.available/ GB::num << "GB" << std::endl;
         std::cout << "free: " << si.free/ GB::num << "GB" << std::endl;
     }
+
+    {
+        // 四、 文件操作
+        boost::filesystem::path p = "chap10_system/_10_3";
+        if(boost::filesystem::exists(p)){
+            if(boost::filesystem::is_empty(p))  // 文件夹是否为空
+                boost::filesystem::remove(p);           // 删除空目录或者单个文件
+            else
+                boost::filesystem::remove_all(p);       // 递归删除该目录下所有的文件
+        }
+
+
+        assert(!boost::filesystem::exists(p));
+        boost::filesystem::create_directory(p);         // 创建目录
+        boost::filesystem::copy_file("chap10_system/_10_3.cpp", "chap10_system/_10_3/_10_3.cpp");   // 拷贝文件
+        boost::filesystem::rename(p / "_10_3.cpp", p / "_10_3_old.cpp");        // 修改名字
+
+        // 创建多层目录
+        boost::filesystem::create_directories(p/"a"/"b");
+    }
+
+    {
+        // 五、 和文件流对接
+        boost::filesystem::path p = "chap10_system/_10_3.cpp";
+
+        {
+            // IF complier not support C++17, must convert path to char* or std::string
+            // Method1, not easy
+            std::ifstream ifs(p.c_str());
+        }
+
+        {
+            // Method2 和文件流对接
+            boost::filesystem::ifstream ifs(p);
+            assert(ifs.is_open());
+            std::cout << ifs.rdbuf() << std::endl;       // 输出内容
+        }
+    }
 }
