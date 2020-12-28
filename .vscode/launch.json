@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             // "args": ["--build_info=yes", "--run_test=s_assign", "--output_format=HRF", "show_progress"],
-            "args": ["--1filename=\"hello\""],
+            // "args": ["--1filename=\"hello\""],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

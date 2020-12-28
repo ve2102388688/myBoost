@@ -47,17 +47,80 @@
 //     return 0;
 // }
 
-#include <iostream>
+// #include <iostream>
 
-struct c
-{
-    int a;
-    int b;
-} c;
-typedef struct c Data;
+// struct c
+// {
+//     int a;
+//     int b;
+// } c;
+// typedef struct c Data;
+
+// int main()
+// {
+//     const Data a1[3] = {{1, 2}, {3, 4}, {5, 6}};
+//     return 0;
+// }
+
+#include <stdio.h>
+#include <math.h>
+#include <time.h>
+
+#define MYREPLACE(dir) #dir "/%s"        // # 替换
+#define MYCONCAT(x,y) x ## y ## l        // ## 连接
 
 int main()
 {
-    const Data a1[3] = {{1, 2}, {3, 4}, {5, 6}};
-    return 0;
+    {
+        printf("%s\n", MYREPLACE(/usr/local));
+        printf("%d\n", MYCONCAT(1, 2));
+        printf("%c\n", '??=');                  // 三字符序列，一共9个
+    }
+
+    {
+        char s[30];
+        printf("%s\n", tmpnam(s));                        // 生成临时文件名
+    }
+
+    {
+        time_t t = time(0);
+        printf("%s\n", ctime(&t));                      // 输出当前时间，注意，已经localtime了
+    }
+#line 100 "main.cpp"    //指定当前行是100，更改文件名为main.cpp，用于调试，之前的行号没有影响
+// #error "This is a fatal error, complier termination"    // 终止编译
+    {
+        perror("This is a error");                      // 输出错误
+        printf("ERROR information, File: %s, Line: %d, Date: %s, Time: %s\n", __FILE__, __LINE__, __DATE__, __TIME__);
+        printf("%d\n", __STDC__);                       // 输出1 准寻标准
+    }
+
+    printf("%f\n", fmod(3.0,2.0));                      // 求解3.0/2.0的余数，答案是1.0
+
+    {
+        double integer;
+        double decimal = modf(3.5, &integer);           // 3.5 = 3 + 0.5(3.5 = integer+decimal)
+        printf("%f, %f\n", integer, decimal);
+    }
+
+    {
+        printf("%f\n", ldexp(1.5, 3));                  // 计算y = x*2^exp
+    }
+    
+    {
+        double y = 12.0;
+        int exp;
+        double x = frexp(y, &exp);
+        printf("%f, %d\n", x, exp);                     // y = x*2^exp,已知y求解x和exp,其中x只能在[0.5,1]
+    }
+
+    {
+        div_t res;
+        res = div(3,2);
+        printf("%d, %d\n", res.quot, res.rem);          // 5/3的商和余数
+    }
+
+    {
+        system("ls");                                   // 执行命令
+        printf("envirnoment: %s\n", getenv("PATH"));    // 获得环境变量的值
+    }
 }
