@@ -10,7 +10,8 @@
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             // "args": ["--build_info=yes", "--run_test=s_assign", "--output_format=HRF", "show_progress"],
-            // "args": ["--1filename=\"hello\""],
+            // "args": ["--help", "--filename=abc"],   // 这里value和name不能用空格，命令行是可以的，这里测试有些不完整
+            "args": ["@/home/topeet/myBoost/chap10_system/config.ini"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
