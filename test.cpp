@@ -63,14 +63,26 @@
 // }
 
 #include <stdio.h>
+#include <iostream>
+#include <complex>
 #include <math.h>
 #include <time.h>
+#pragma disable(warning:4996)
 
 #define MYREPLACE(dir) #dir "/%s"        // # 替换
 #define MYCONCAT(x,y) x ## y ## l        // ## 连接
 
+// A macro which produces "name_2left" from "name".
+// #define BOOST_OPERATOR2_LEFT(name) name##2##_##left
+
 int main()
 {
+    // std::cout << BOOST_OPERATOR2_LEFT("this") << std::endl;
+    {
+        //std::complex<double> A(3.0, 4.0);
+        // std::cout << hypot(A.real(), A.imag()) << std::endl;
+        printf("%f\n", hypot(3.0, 4.0));
+    }
     {
         printf("%s\n", MYREPLACE(/usr/local));
         printf("%d\n", MYCONCAT(1, 2));
@@ -86,8 +98,8 @@ int main()
         time_t t = time(0);
         printf("%s\n", ctime(&t));                      // 输出当前时间，注意，已经localtime了
     }
-#line 100 "main.cpp"    //指定当前行是100，更改文件名为main.cpp，用于调试，之前的行号没有影响
 // #error "This is a fatal error, complier termination"    // 终止编译
+#line 100 "main.cpp"    //指定当前行是100，更改文件名为main.cpp，用于调试，之前的行号没有影响
     {
         perror("This is a error");                      // 输出错误
         printf("ERROR information, File: %s, Line: %d, Date: %s, Time: %s\n", __FILE__, __LINE__, __DATE__, __TIME__);
@@ -115,7 +127,7 @@ int main()
 
     {
         div_t res;
-        res = div(3,2);
+        res = div(5,3);
         printf("%d, %d\n", res.quot, res.rem);          // 5/3的商和余数
     }
 
