@@ -75,8 +75,10 @@
 // A macro which produces "name_2left" from "name".
 // #define BOOST_OPERATOR2_LEFT(name) name##2##_##left
 
-int main()
+int main(int argc, char* argv[])
 {
+    // (void)argc;
+	// (void)argv;
     // std::cout << BOOST_OPERATOR2_LEFT("this") << std::endl;
     {
         //std::complex<double> A(3.0, 4.0);
@@ -134,5 +136,7 @@ int main()
     {
         system("ls");                                   // 执行命令
         printf("envirnoment: %s\n", getenv("PATH"));    // 获得环境变量的值
+
+        std::cout << clock() / CLOCKS_PER_SEC << std::endl;
     }
 }
